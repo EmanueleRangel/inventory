@@ -1,5 +1,4 @@
-import sys
-import os
+from app.models.models import Item
+from app.database import Base
 
-print(f"sys.path: {sys.path}")
-print(f"Working directory: {os.getcwd()}")
+print("Imports funcionaram corretamente!")

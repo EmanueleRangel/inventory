@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
-from app.database import Base  # Importando o Base de app.database
+from app.database import Base, engine # Importando o Base de app.database
 
 class Item(Base):
     __tablename__ = "items"
@@ -9,13 +9,6 @@ class Item(Base):
     nome = Column(String, index=True)
     departamento = Column(String)
     itens = Column(Integer)
-
-
-class ItemCreate(BaseModel):
-    nome: str
-    matricula: str
-    departamento: str
-    item_nome: str
 
     class Config:
         orm_mode = True  # Permite que o Pydantic use o modelo SQLAlchemy
@@ -28,4 +21,12 @@ class ItemResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+from pydantic import BaseModel
+
+class ItemCreate(BaseModel):
+    nome: str
+    departamento: str
+    itens: int
+
 
