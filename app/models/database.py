@@ -2,6 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from app.database import engine
 
 # URL de conexão com o banco de dados
 DATABASE_URL = "sqlite:///./test.db"  # Ajuste para o seu banco de dados
