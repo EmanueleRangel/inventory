@@ -16,4 +16,5 @@ def generate_graph(items: List[Item]):
     # Gerar o gráfico
     fig = px.bar(df, x="Departamento", color="Item", title="Itens por Departamento")
     
-    return fig.to_json()  # Retorna o gráfico em formato JSON para ser usado no frontend
+    # Retorna o gráfico como HTML
+    return fig.to_html(full_html=False)

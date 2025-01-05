@@ -10,6 +10,7 @@ from app.models import Item
 from app.utils import generate_graph  # Importando a função generate_graph
 from sqlalchemy.orm import Session
 from app.database import get_db
+from fastapi.responses import HTMLResponse
 
 router = APIRouter()
 
@@ -36,6 +37,11 @@ def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
 def get_graph(db: Session = Depends(get_db)):
     items = db.query(Item).all()  # Obtendo todos os itens do banco de dados
     return generate_graph(items)  # Usando a função para gerar o gráfico
+
+@router.get("/grafico", response_class=HTMLResponse)
+def get_graph(db: Session = Depends(get_db)):
+    items = db.query(Item).all()  # Obtendo todos os itens do banco de dados
+    return generate_graph(items)  # Retorna o gráfico gerado como HTML
 
 def get_db():
     db = SessionLocal()
