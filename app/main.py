@@ -1,7 +1,9 @@
+# app/main.py
+
 from fastapi import FastAPI
-from app.routers import items  # Certifique-se de que o caminho da importação esteja correto
+from app.routers import items  # Importando as rotas do arquivo items.py
 
 app = FastAPI()
 
-# Incluindo o router de itens
+# Registrando as rotas no app FastAPI
 app.include_router(items.router)

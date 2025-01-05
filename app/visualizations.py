@@ -1,7 +1,7 @@
 import plotly.express as px
 import pandas as pd
 from typing import List
-from .models import Item
+from ..models.models import Item
 
 def generate_graph(items: List[Item]):
     df = pd.DataFrame([{
