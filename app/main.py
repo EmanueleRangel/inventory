@@ -11,6 +11,10 @@ from app.routers import items
 from app.database import engine
 import app.models as models
 from app.models import Item
+from app.database import engine, Base
+from app.models.models import Item  # Importe o modelo aqui para criar as tabelas
+
+Base.metadata.create_all(bind=engine)  # Certifique-se de que as tabelas são criadas
 
 # Inicializando o FastAPI
 app = FastAPI()

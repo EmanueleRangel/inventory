@@ -11,6 +11,7 @@ from app.utils import generate_graph  # Importando a função generate_graph
 from sqlalchemy.orm import Session
 from app.database import get_db
 from fastapi.responses import HTMLResponse
+from app.database import Base, engine
 
 router = APIRouter()
 
