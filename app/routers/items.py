@@ -1,13 +1,15 @@
 # app/routers/items.py
 from app.models import Item, ItemResponse, ItemCreate  # Corrija os imports
-from app.models import Item  # Importe diretamente de app.models, que está no __init__.py
-from app.database import get_db
 from typing import List
 from fastapi.responses import JSONResponse
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 from app import models, schemas
 from app.database import SessionLocal  # Corrigindo a importação
+from fastapi import APIRouter, Depends
+from app.models import Item
+from app.utils import generate_graph  # Importando a função generate_graph
+from sqlalchemy.orm import Session
+from app.database import get_db
 
 router = APIRouter()
 
@@ -30,6 +32,11 @@ def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
     db.refresh(db_item)
     return db_item
 
+@router.get("/grafico")
+def get_graph(db: Session = Depends(get_db)):
+    items = db.query(Item).all()  # Obtendo todos os itens do banco de dados
+    return generate_graph(items)  # Usando a função para gerar o gráfico
+
 def get_db():
     db = SessionLocal()
     try:
@@ -37,9 +44,3 @@ def get_db():
     finally:
         db.close()
 
-# Rota GET para gerar gráfico
-@router.get("/grafico", response_class=JSONResponse)
-async def get_graph(db: Session = Depends(get_db)):
-    items = db.query(Item).all()  # Consulta os itens do banco de dados
-    graph_json = generate_graph(items)
-    return JSONResponse(content=graph_json)  # Retorna o gráfico como JSON
