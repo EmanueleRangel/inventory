@@ -1,7 +1,14 @@
 # app/routers/items.py
+<<<<<<< HEAD
+=======
+from fastapi import APIRouter, Depends
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+>>>>>>> 4d355b0 (remove errors and add improvements)
 from app.models import Item, ItemResponse, ItemCreate  # Corrija os imports
 from typing import List
 from fastapi.responses import JSONResponse
+<<<<<<< HEAD
 from fastapi import APIRouter, Depends
 from app import models, schemas
 from app.models.database import SessionLocal  # Corrigindo a importação
@@ -12,6 +19,11 @@ from sqlalchemy.orm import Session
 from fastapi.responses import HTMLResponse
 from app.models.database import Base, engine
 from app.models.database import get_db
+=======
+from app.models import Item, ItemCreate, ItemResponse
+from app.visualizations import generate_graph
+
+>>>>>>> 4d355b0 (remove errors and add improvements)
 
 router = APIRouter()
 
@@ -55,3 +67,19 @@ def get_db():
     finally:
         db.close()
 
+<<<<<<< HEAD
+=======
+# Rota GET para gerar gráfico
+@router.get("/grafico", response_class=JSONResponse)
+async def get_graph(db: Session = Depends(get_db)):
+    items = db.query(Item).all()  # Consulta os itens do banco de dados
+    graph_json = generate_graph(items)
+    return JSONResponse(content=graph_json)  # Retorna o gráfico como JSON
+
+
+def main():
+    statement = select(Item.items)
+
+if __name__ == "__main__":
+    main()
+>>>>>>> 4d355b0 (remove errors and add improvements)
