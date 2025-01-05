@@ -4,14 +4,14 @@ from typing import List
 from fastapi.responses import JSONResponse
 from fastapi import APIRouter, Depends
 from app import models, schemas
-from app.database import SessionLocal  # Corrigindo a importação
+from app.models.database import SessionLocal  # Corrigindo a importação
 from fastapi import APIRouter, Depends
 from app.models import Item
 from app.utils import generate_graph  # Importando a função generate_graph
 from sqlalchemy.orm import Session
 from fastapi.responses import HTMLResponse
-from app.database import Base, engine
-from app.database import get_db
+from app.models.database import Base, engine
+from app.models.database import get_db
 
 router = APIRouter()
 
