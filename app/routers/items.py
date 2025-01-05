@@ -5,8 +5,9 @@ from app.models import Item, ItemResponse, ItemCreate  # Corrija os imports
 from app.database import get_db
 from typing import List
 from fastapi.responses import JSONResponse
-from app.models import Item, ItemResponse, ItemCreate 
-
+from app.models import Item 
+from app.models import ItemCreate 
+from app.models import ItemResponse 
 
 router = APIRouter()
 
