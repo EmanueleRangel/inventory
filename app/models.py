@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel
 
-# Modelo Pydantic para resposta de Item
+# Modelo Pydantic base para Item
 class ItemBase(BaseModel):
     nome: str
     matricula: str
@@ -10,10 +10,12 @@ class ItemBase(BaseModel):
     item_nome: str
 
     class Config:
-        orm_mode = True  # Permite que o Pydantic trabalhe com objetos SQLAlchemy
+        orm_mode = True  # Permite que Pydantic converta objetos SQLAlchemy em modelos Pydantic
 
+# Modelo para criação de item
 class ItemCreate(ItemBase):
     pass
 
+# Modelo para resposta de item, com o ID
 class ItemResponse(ItemBase):
     id: int

@@ -1,3 +1,3 @@
 # app/models/__init__.py
 
-from .models import Item  # Assegure-se de que a classe Item está sendo importada corretamente
+from .models import Item, ItemCreate, ItemResponse  # Certifique-se de importar o ItemResponse corretamente

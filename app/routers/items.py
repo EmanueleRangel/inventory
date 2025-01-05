@@ -1,40 +1,31 @@
 # app/routers/items.py
 from fastapi import APIRouter, Depends
-from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
-from app.models import Item
+from app.models import Item, ItemResponse, ItemCreate  # Corrija os imports
 from app.database import get_db
-import pandas as pd
-import plotly.express as px
 from typing import List
+from fastapi.responses import JSONResponse
+from app.models import Item, ItemResponse, ItemCreate 
+
 
 router = APIRouter()
 
-@router.get("/itens", response_model=List[ItemResponse])  # Use o modelo Pydantic
+# Rota GET para listar os itens
+@router.get("/itens", response_model=List[ItemResponse])  # Usando ItemResponse corretamente
 async def get_items(db: Session = Depends(get_db)):
     items = db.query(Item).all()  # Consulta os itens no banco de dados
-    return items  # Retorna a lista de itens
+    return items  # Retorna a lista de itens, que será convertida para ItemResponse automaticamente
 
-@router.post("/itens", response_model=ItemResponse)  # Use o modelo Pydantic
+# Rota POST para cadastrar um novo item
+@router.post("/itens", response_model=ItemResponse)  # Usando ItemResponse corretamente
 async def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     db_item = Item(**item.dict())  # Converte o modelo Pydantic para SQLAlchemy
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
-    return db_item  # Retorna o item criado, usando o modelo Pydantic
+    return db_item  # Retorna o item criado, usando o modelo ItemResponse para formatação
 
-router = APIRouter()
-def generate_graph(items: List[Item]):
-    df = pd.DataFrame([{
-        "Nome": item.nome,
-        "Matrícula": item.matricula,
-        "Departamento": item.departamento,
-        "Item": item.item_nome
-    } for item in items])
-    
-    fig = px.bar(df, x="Departamento", color="Item", title="Itens por Departamento")
-    return fig.to_json()
-
+# Rota GET para gerar gráfico
 @router.get("/grafico", response_class=JSONResponse)
 async def get_graph(db: Session = Depends(get_db)):
     items = db.query(Item).all()  # Consulta os itens do banco de dados
