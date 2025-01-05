@@ -9,12 +9,11 @@ from fastapi import APIRouter, Depends
 from app.models import Item
 from app.utils import generate_graph  # Importando a função generate_graph
 from sqlalchemy.orm import Session
-from app.database import get_db
 from fastapi.responses import HTMLResponse
 from app.database import Base, engine
+from app.database import get_db
 
 router = APIRouter()
-
 
 # Função para obter a sessão do banco de dados
 def get_db():

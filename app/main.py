@@ -13,6 +13,18 @@ import app.models as models
 from app.models import Item
 from app.database import engine, Base
 from app.models.models import Item  # Importe o modelo aqui para criar as tabelas
+from app.database import get_db
+import sys
+import os
+
+# Adiciona o diretório raiz ao sys.path para garantir que os módulos sejam encontrados
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from fastapi import FastAPI
+from app.models import Item
+# Outras importações
+
+app = FastAPI()
 
 Base.metadata.create_all(bind=engine)  # Certifique-se de que as tabelas são criadas
 
