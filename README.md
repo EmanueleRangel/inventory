@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Inventory
 
 Projeto backend com cadastro e visuzalização (lista e gráfico) de itens em um inventário.
@@ -16,6 +17,20 @@ Antes de começar, você precisará de algumas ferramentas instaladas no seu sis
 Primeiro, clone o repositório do projeto em sua máquina local:
 
 ```bash
+=======
+Inventory
+Projeto backend com cadastro e visuzalização (lista e gráfico) de itens em um inventário.
+
+Requisitos
+Antes de começar, você precisará de algumas ferramentas instaladas no seu sistema:
+
+Python
+Git
+Passo a Passo para Inicialização
+1. Clonar o Repositório
+Primeiro, clone o repositório do projeto em sua máquina local:
+
+>>>>>>> 060d9c6 (add readme)
 git clone https://github.com/seuusuario/nome-do-repositorio.git
 
 cd nome-do-repositorio
@@ -45,6 +60,7 @@ python nome_do_script.py
 pip install pytest
 
 pytest
+<<<<<<< HEAD
 
 ```
 Licença
@@ -53,3 +69,8 @@ Licença
 Esse modelo inclui a criação de um ambiente virtual, instalação das dependências via `requirements.txt`, e as instruções para rodar o projeto em Python. Certifique-se de adicionar um arquivo `requirements.txt` contendo as bibliotecas que seu projeto utiliza.
 
 
+=======
+Licença
+
+Esse modelo inclui a criação de um ambiente virtual, instalação das dependências via requirements.txt, e as instruções para rodar o projeto em Python. Certifique-se de adicionar um arquivo requirements.txt contendo as bibliotecas que seu projeto utiliza.
+>>>>>>> 060d9c6 (add readme)
