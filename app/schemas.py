@@ -1,13 +1,15 @@
+# app/schemas.py
 from pydantic import BaseModel
 
-class ItemCreate(BaseModel):
-    nome: str
-    matricula: str
+class ItemBase(BaseModel):
     departamento: str
-    item_nome: str
+    itens: int
+
+class ItemCreate(ItemBase):
+    pass
+
+class ItemResponse(ItemBase):
+    id: int
 
     class Config:
-        orm_mode = True  # Permite a conversão de objetos SQLAlchemy para dict
-
-class ItemResponse(ItemCreate):
-    id: int
+        orm_mode = True
