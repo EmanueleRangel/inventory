@@ -10,6 +10,7 @@ from app.models import Item
 from app.routers import items
 from app.database import engine
 import app.models as models
+from app.models import Item
 
 # Inicializando o FastAPI
 app = FastAPI()
