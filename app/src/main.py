@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # app/main.py
 from fastapi import FastAPI, Depends
 from fastapi.responses import HTMLResponse
@@ -16,6 +17,22 @@ from app.models.models import Item  # Importe o modelo aqui para criar as tabela
 from app.models.database import get_db
 import sys
 import os
+=======
+# src/main.py
+# main.py
+from app.models.models import Item
+from app.db import get_session
+
+# Exemplo de uso
+session = get_session()
+result = session.query(Item).filter(Item.some_column == 'valor_especifico').all()
+
+for item in result:
+    print(item)
+
+def main():
+    print("Olá, mundo! Este é o meu novo projeto.")
+>>>>>>> 5b82b6b (add tests and improvements)
 
 # Adiciona o diretório raiz ao sys.path para garantir que os módulos sejam encontrados
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
