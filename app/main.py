@@ -8,10 +8,8 @@ from . import models, database, schemas
 
 app = FastAPI()
 
-# Criação das tabelas no banco de dados
 models.Base.metadata.create_all(bind=database.engine)
 
-# Dependência para obter a sessão do banco de dados
 def get_db():
     db = database.SessionLocal()
     try:
