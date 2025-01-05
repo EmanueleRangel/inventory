@@ -14,20 +14,25 @@ from fastapi.responses import HTMLResponse
 
 router = APIRouter()
 
-# Rota GET para listar os itens
-@router.get("/itens", response_model=List[ItemResponse])  # Usando ItemResponse corretamente
-async def get_items(db: Session = Depends(get_db)):
-    items = db.query(Item).all()  # Consulta os itens no banco de dados
-    return items  # Retorna a lista de itens, que será convertida para ItemResponse automaticamente
 
-@router.post("/items/")
+# Função para obter a sessão do banco de dados
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+# Rota GET para obter a lista de itens
+@router.get("/items/", response_model=list[schemas.ItemResponse])
+def get_items(db: Session = Depends(get_db)):
+    items = db.query(models.Item).all()
+    return items
+
+# Rota POST para cadastrar um novo item
+@router.post("/items/", response_model=schemas.ItemResponse)
 def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
-    db_item = models.Item(
-        nome=item.nome,
-        matricula=item.matricula,
-        departamento=item.departamento,
-        item_nome=item.item_nome
-    )
+    db_item = models.Item(departamento=item.departamento, itens=item.itens)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)

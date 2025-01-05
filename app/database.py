@@ -1,21 +1,23 @@
-# app/database.py
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from .config import DATABASE_URL  # Ajuste se necessário
 
-# Configuração do banco de dados
-SQLALCHEMY_DATABASE_URL = DATABASE_URL  # Exemplo: 'sqlite:///./test.db'
+# Configuração do banco de dados (use o URL correto do seu banco de dados)
+SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"  # Para SQLite, ou outro banco de dados
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+# Cria o engine de conexão
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})  # Necessário para SQLite
+
+# Cria a sessão local
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Base para as classes de modelos
 Base = declarative_base()
 
-# Função get_db
+# Função para obter a sessão do banco de dados
 def get_db():
-    db = SessionLocal()  # Cria uma nova sessão
+    db = SessionLocal()
     try:
-        yield db  # Retorna a sessão para ser usada nas rotas
+        yield db
     finally:
-        db.close()  # Fecha a sessão após a execução
+        db.close()
