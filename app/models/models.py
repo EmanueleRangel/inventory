@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
-from app.database import Base, engine # Importando o Base de app.database
+from .database import Base  # Importe o Base do arquivo database.py
 
 class Item(Base):
     __tablename__ = "items"

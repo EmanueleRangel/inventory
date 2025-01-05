@@ -1,5 +1,5 @@
-from app.database import Base, engine
+from app.database import engine
 from app.models import Item
 
-# Criação das tabelas no banco de dados
-Base.metadata.create_all(bind=engine)
+# Criar as tabelas no banco de dados
+Item.metadata.create_all(bind=engine)
