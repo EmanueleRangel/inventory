@@ -21,12 +21,13 @@ class Item(Base):
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True, index=True)
+    matricula = Column(Integer, primary_key=True, index=True)
     nome = Column(String, index=True)
     departamento = Column(String)
-    itens = Column(Integer)
+    item_nome = Column(Integer)
 
-    class Config:
-        orm_mode = True  # Permite que o Pydantic use o modelo SQLAlchemy
+class Config:
+    orm_mode = True
 
 #class ItemResponse(BaseModel):
  #   id: int

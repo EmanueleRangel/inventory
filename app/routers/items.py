@@ -3,9 +3,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from sqlalchemy.orm import Session
 from app.models.models import Item, ItemResponse, ItemCreate  # Certifique-se de que os modelos estão corretos
-from app.database import get_db
+#from app.database import get_db
 from fastapi.responses import JSONResponse
-from app import models, schemas
 from app.models.database import SessionLocal  # Corrigindo a importação
 from app.models import Item
 from app.utils import generate_graph  # Importando a função generate_graph
