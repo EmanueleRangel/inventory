@@ -11,15 +11,13 @@ from app.visualizations import generate_graph
 
 router = APIRouter(prefix="/itens", tags=["Itens"])
 
-# Função para obter a sessão do banco de dados
 def get_db():
-    db = SessionLocal()  # Cria uma nova sessão do banco de dados
+    db = SessionLocal()
     try:
-        yield db  # Retorna a sessão para ser usada nas rotas
+        yield db
     finally:
-        db.close()  # Garante que a sessão será fechada após o uso
+        db.close()
 
-# Rota GET para listar todos os itens
 @router.get("/", response_model=List[ItemResponse])  
 async def get_items(db: Session = Depends(get_db)):
     try:
@@ -30,11 +28,10 @@ async def get_items(db: Session = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Rota POST para criar um novo item
 @router.post("/", response_model=ItemResponse)
 async def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     try:
-        db_item = Item(**item.dict()) 
+        db_item = Item(**item.dict())  # Passando os dados do Pydantic para o SQLAlchemy
         db.add(db_item)
         db.commit()
         db.refresh(db_item)
@@ -43,7 +40,6 @@ async def create_item(item: ItemCreate, db: Session = Depends(get_db)):
         db.rollback()  # Reverte a transação em caso de erro
         raise HTTPException(status_code=500, detail="Error while creating item: " + str(e))
 
-# Rota GET para gerar o gráfico como JSON
 @router.get("/grafico", response_class=JSONResponse)
 async def get_graph(db: Session = Depends(get_db)):
     try:
@@ -55,7 +51,6 @@ async def get_graph(db: Session = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error generating graph: " + str(e))
 
-# Rota GET para gerar o gráfico como HTML
 @router.get("/grafico", response_class=HTMLResponse)
 def get_graph_html(db: Session = Depends(get_db)):
     try:
