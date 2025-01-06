@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # test_import.py
 
 import sys
@@ -27,3 +28,9 @@ result = session.query(Item).filter(Item.some_column == 'valor_especifico').all(
 for item in result:
     print(item)
 >>>>>>> 5b82b6b (add tests and improvements)
+=======
+# test_import.py
+from app.models.models import Item
+
+print("Importação realizada com sucesso!")
+>>>>>>> 6286e90 (remove error from get list and post)

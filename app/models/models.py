@@ -1,3 +1,4 @@
+from app.database import Base 
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
 from .database import Base  # Importe o Base do arquivo database.py
@@ -20,8 +21,12 @@ class ItemResponse(ItemCreate):
     class Config:
         orm_mode = True
 
+<<<<<<< HEAD
 class Item:
 >>>>>>> 4d355b0 (remove errors and add improvements)
+=======
+class Item(Base):
+>>>>>>> 6286e90 (remove error from get list and post)
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True, index=True)
