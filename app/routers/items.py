@@ -43,13 +43,10 @@ def get_db():
     finally:
         db.close()
 
-# Rota GET para obter a lista de itens
-@router.get("/items/", response_model=list[schemas.ItemResponse])
-def get_items(db: Session = Depends(get_db)):
-    items = db.query(models.Item).all()
-    return items
+
 
 # Rota POST para cadastrar um novo item
+<<<<<<< HEAD
 @router.post("/items/", response_model=schemas.ItemResponse)
 def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
     db_item = models.Item(departamento=item.departamento, itens=item.itens)
@@ -61,6 +58,20 @@ def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
 from app.visualizations import generate_graph
 
 router = APIRouter(prefix="/itens", tags=["Itens"])
+=======
+#@router.post("/items/", response_model=schemas.ItemResponse)
+#def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
+ #   db_item = models.Item(departamento=item.departamento, itens=item.itens)
+  #  db.add(db_item)
+   # db.commit()
+    #db.refresh(db_item)
+    #return db_item
+
+#@router.get("/grafico")
+#def get_graph(db: Session = Depends(get_db)):
+ #   items = db.query(Item).all()  # Obtendo todos os itens do banco de dados
+  #  return generate_graph(items)  # Usando a função para gerar o gráfico
+>>>>>>> 446219c (adjust duplicate code)
 
 # Rota GET para listar todos os itens
 @router.get("/", response_model=List[ItemResponse])  # Especifica o tipo de resposta como lista de itens
@@ -130,4 +141,19 @@ if __name__ == "__main__":
         return JSONResponse(content=graph_json)  # Retorna o gráfico como JSON
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error generating graph: " + str(e))
+<<<<<<< HEAD
 >>>>>>> 6286e90 (remove error from get list and post)
+=======
+
+@router.get("/grafico", response_class=HTMLResponse)
+def get_graph(db: Session = Depends(get_db)):
+    items = db.query(Item).all()  # Obtendo todos os itens do banco de dados
+    return generate_graph(items) 
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+>>>>>>> 446219c (adjust duplicate code)
