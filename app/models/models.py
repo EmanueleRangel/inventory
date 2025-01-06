@@ -26,19 +26,11 @@ class Item(Base):
     departamento = Column(String, nullable=False)
     item_nome = Column(String, nullable=False)
 
-class Config:
-    orm_mode = True
-
-#class ItemResponse(BaseModel):
- #   id: int
-  #  nome: str
-   # departamento: str
-    #itens: int
-
     class Config:
         orm_mode = True
 
 class ItemCreate(BaseModel):
     nome: str
+    matricula: int
     departamento: str
-    itens: int
+    item_nome: str

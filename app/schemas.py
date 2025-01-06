@@ -3,7 +3,8 @@ from pydantic import BaseModel
 
 class ItemBase(BaseModel):
     departamento: str
-    itens: int
+    item_nome: int
+    matricula: int
 
 class ItemCreate(ItemBase):
     pass

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# app/main.py
 from fastapi import FastAPI, Depends
 from fastapi.responses import HTMLResponse
 import plotly.express as px
@@ -17,14 +15,9 @@ from app.models.models import Item  # Importe o modelo aqui para criar as tabela
 from app.models.database import get_db
 import sys
 import os
-=======
-# src/main.py
-# main.py
 from app.models.models import Item
-from app.db import get_session
 
-# Exemplo de uso
-session = get_session()
+session = get_session() # type: ignore
 result = session.query(Item).filter(Item.some_column == 'valor_especifico').all()
 
 for item in result:
@@ -32,23 +25,15 @@ for item in result:
 
 def main():
     print("Olá, mundo! Este é o meu novo projeto.")
->>>>>>> 5b82b6b (add tests and improvements)
 
-# Adiciona o diretório raiz ao sys.path para garantir que os módulos sejam encontrados
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from fastapi import FastAPI
-from app.models import Item
-# Outras importações
 
 app = FastAPI()
 
 Base.metadata.create_all(bind=engine)  # Certifique-se de que as tabelas são criadas
 
-# Inicializando o FastAPI
 app = FastAPI()
 
-# Função para obter uma sessão do banco de dados
 def get_db():
     db = SessionLocal()
     try:
@@ -56,7 +41,6 @@ def get_db():
     finally:
         db.close()
 
-# Função para gerar o gráfico
 def generate_graph(db: Session):
     # Consulta ao banco de dados
     items = db.query(Item.departamento, Item.itens).all()
@@ -64,17 +48,13 @@ def generate_graph(db: Session):
     if not items:
         return "<html><body>No data available to display graph</body></html>"
 
-    # Converte os dados para um DataFrame
     df = pd.DataFrame(items, columns=["Departamento", "Itens"])
 
-    # Cria um gráfico de barras
     fig = px.bar(df, x="Departamento", y="Itens", title="Itens por Departamento")
     
-    # Converte o gráfico para HTML
     graph_html = to_html(fig, full_html=False)
     return graph_html
 
-# Rota para retornar o gráfico em HTML
 @app.get("/grafico", response_class=HTMLResponse)
 async def get_graph(db: Session = Depends(get_db)):
     # Gera o gráfico com dados do banco de dados
@@ -96,17 +76,13 @@ def create_sample_data(db: Session):
     db.add(item2)
     db.commit()
 
-# app/main.py
 @app.on_event("startup")
 def on_startup():
-    # Apaga e recria as tabelas (remova este código se não quiser apagar os dados)
     Base.metadata.drop_all(bind=engine)  # Apaga as tabelas antigas
     Base.metadata.create_all(bind=engine)  # Cria as novas tabelas
 
-# Cria as tabelas no banco de dados ao iniciar a aplicação
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Inclui as rotas do arquivo de roteadores
 app.include_router(items.router)

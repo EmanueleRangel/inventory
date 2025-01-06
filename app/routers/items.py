@@ -12,11 +12,19 @@ from app.models import Item
 from app.utils import generate_graph  # Importando a função generate_graph
 from sqlalchemy.orm import Session
 from fastapi.responses import HTMLResponse
-from app.models.database import get_db
 from app.models import Item, ItemCreate, ItemResponse
 from app.visualizations import generate_graph
 
 router = APIRouter()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 @router.post("/items/", response_model=schemas.ItemResponse)
 def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
@@ -74,7 +82,7 @@ def main():
 if __name__ == "__main__":
     main()
     try:
-        items = db.query(Item).all()  # A consulta agora está correta para retornar todos os itens
+        items = db.query(Item).all()  # type: ignore # A consulta agora está correta para retornar todos os itens
         if not items:
             raise HTTPException(status_code=404, detail="No items found for graph generation")  # Verifica se há itens
         graph_json = generate_graph(items)  # Gera o gráfico
@@ -86,10 +94,3 @@ if __name__ == "__main__":
 def get_graph(db: Session = Depends(get_db)):
     items = db.query(Item).all()  # Obtendo todos os itens do banco de dados
     return generate_graph(items) 
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
