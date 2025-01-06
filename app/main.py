@@ -1,17 +1,12 @@
-<<<<<<< HEAD
-# app/main.py
 from fastapi import FastAPI, Depends
 from fastapi.responses import HTMLResponse
 import plotly.express as px
 import pandas as pd
 from plotly.io import to_html
 from sqlalchemy.orm import Session
-<<<<<<< HEAD
 from app.models.database import SessionLocal, engine, Base
 from app.models import Item
-=======
 from app.models.database import SessionLocal, engine, Base #get_db
->>>>>>> 446219c (adjust duplicate code)
 from app.routers import items
 from app.models.database import engine
 import app.models as models
@@ -97,7 +92,6 @@ app = FastAPI()
 
 # Inclui as rotas do arquivo de roteadores
 app.include_router(items.router)
-=======
 from fastapi import FastAPI
 from app.routers import items
 from app.database import Base, engine
@@ -122,4 +116,3 @@ app.include_router(items.router)
 
 # Cria tabelas no banco de dados
 Base.metadata.create_all(bind=engine)
->>>>>>> 6286e90 (remove error from get list and post)

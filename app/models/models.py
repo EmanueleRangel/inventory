@@ -1,14 +1,8 @@
 from app.database import Base 
 from sqlalchemy import Column, Integer, String
-<<<<<<< HEAD
 from .database import Base  # Importe o Base do arquivo database.py
-=======
 from pydantic import BaseModel
->>>>>>> 446219c (adjust duplicate code)
 
-<<<<<<< HEAD
-class Item(Base):
-=======
 class ItemCreate(BaseModel):
     nome: str
     matricula: str
@@ -24,19 +18,13 @@ class ItemResponse(ItemCreate):
     class Config:
         orm_mode = True
 
-<<<<<<< HEAD
-class Item:
->>>>>>> 4d355b0 (remove errors and add improvements)
-=======
 class Item(Base):
->>>>>>> 6286e90 (remove error from get list and post)
-    __tablename__ = "items"
-
-    id = Column(Integer, primary_key=True, index=True)
-    matricula = Column(Integer, primary_key=True, index=True)
-    nome = Column(String, index=True)
-    departamento = Column(String)
-    item_nome = Column(Integer)
+    __tablename__ = "items"  # Nome da tabela no banco de dados
+    id = Column(Integer, primary_key=True, autoincrement=True)  # Definindo 'id' como autoincremento
+    matricula = Column(String, nullable=False)
+    nome = Column(String, nullable=False)
+    departamento = Column(String, nullable=False)
+    item_nome = Column(String, nullable=False)
 
 class Config:
     orm_mode = True
@@ -48,17 +36,9 @@ class Config:
     #itens: int
 
     class Config:
-<<<<<<< HEAD
         orm_mode = True
-
-from pydantic import BaseModel
 
 class ItemCreate(BaseModel):
     nome: str
     departamento: str
     itens: int
-
-
-=======
-        orm_mode = True
->>>>>>> 446219c (adjust duplicate code)
