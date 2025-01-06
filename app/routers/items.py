@@ -54,11 +54,11 @@ async def get_items(db: Session = Depends(get_db)):
 @router.post("/", response_model=ItemResponse)
 async def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     try:
-        db_item = Item(**item.dict())  # Converte o modelo Pydantic para SQLAlchemy
+        db_item = Item(**item.dict()) 
         db.add(db_item)
         db.commit()
         db.refresh(db_item)
-        return db_item  # Retorna o item criado, formatado como ItemResponse
+        return db_item
     except Exception as e:
         db.rollback()  # Garante que o banco de dados seja revertido em caso de erro
         raise HTTPException(status_code=500, detail="Error while creating item: " + str(e))

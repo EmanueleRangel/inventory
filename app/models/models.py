@@ -18,13 +18,13 @@ class ItemResponse(ItemCreate):
         orm_mode = True
 
 class Item(Base):
-    __tablename__ = "items"
+    __tablename__ = "items"  # Nome da tabela no banco de dados
 
-    id = Column(Integer, primary_key=True, index=True)
-    matricula = Column(Integer, primary_key=True, index=True)
-    nome = Column(String, index=True)
-    departamento = Column(String)
-    item_nome = Column(Integer)
+    id = Column(Integer, primary_key=True, autoincrement=True)  # Definindo 'id' como autoincremento
+    matricula = Column(String, nullable=False)
+    nome = Column(String, nullable=False)
+    departamento = Column(String, nullable=False)
+    item_nome = Column(String, nullable=False)
 
 class Config:
     orm_mode = True
