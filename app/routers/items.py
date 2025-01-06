@@ -13,12 +13,15 @@ from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from sqlalchemy.orm import Session
 from app.models.models import Item, ItemResponse, ItemCreate  # Certifique-se de que os modelos estão corretos
-from app.database import get_db
+#from app.database import get_db
 from fastapi.responses import JSONResponse
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 from fastapi import APIRouter, Depends
 from app import models, schemas
+=======
+>>>>>>> 8501f1d (remove get list errors)
 from app.models.database import SessionLocal  # Corrigindo a importação
 from fastapi import APIRouter, Depends
 from app.models import Item
