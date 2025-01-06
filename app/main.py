@@ -6,12 +6,8 @@ import pandas as pd
 from plotly.io import to_html
 from sqlalchemy.orm import Session
 from app.models.database import SessionLocal, engine, Base
-from app.models import Item
 from app.routers import items
-from app.models.database import engine
 import app.models as models
-from app.models import Item
-from app.models.database import engine, Base
 from app.models.models import Item  # Importe o modelo aqui para criar as tabelas
 from app.models.database import get_db
 import sys
@@ -91,5 +87,15 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Inclui as rotas do arquivo de roteadores
+sys.dont_write_bytecode = True
+
+# Adiciona a raiz do projeto ao sys.path (para evitar problemas de importação)
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+app = FastAPI()
+
+# Inclui as rotas
 app.include_router(items.router)
+
+# Cria tabelas no banco de dados
+Base.metadata.create_all(bind=engine)

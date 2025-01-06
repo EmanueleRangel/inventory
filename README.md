@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Inventory
 Projeto backend com cadastro e visuzalização (lista e gráfico) de itens em um inventário.
 
@@ -42,3 +43,5 @@ pytest
 Licença
 
 Esse modelo inclui a criação de um ambiente virtual, instalação das dependências via requirements.txt, e as instruções para rodar o projeto em Python. Certifique-se de adicionar um arquivo requirements.txt contendo as bibliotecas que seu projeto utiliza.
+=======
+>>>>>>> main

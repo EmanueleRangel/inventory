@@ -1,4 +1,5 @@
 # test_import.py
+<<<<<<< HEAD
 
 import sys
 import os
@@ -10,3 +11,8 @@ try:
     print("Importação bem-sucedida!")
 except Exception as e:
     print(f"Erro ao importar: {e}")
+=======
+from app.models.models import Item
+
+print("Importação realizada com sucesso!")
+>>>>>>> main
