@@ -5,11 +5,10 @@ import plotly.express as px
 import pandas as pd
 from plotly.io import to_html
 from sqlalchemy.orm import Session
-from app.models.database import SessionLocal, engine, Base
+from app.models.database import SessionLocal, engine, Base #get_db
 from app.routers import items
 import app.models as models
 from app.models.models import Item  # Importe o modelo aqui para criar as tabelas
-from app.models.database import get_db
 import sys
 import os
 

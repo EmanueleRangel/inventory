@@ -1,7 +1,6 @@
 from app.database import Base 
-from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
-from .database import Base
+from pydantic import BaseModel
 
 class ItemCreate(BaseModel):
     nome: str
@@ -29,18 +28,11 @@ class Item(Base):
     class Config:
         orm_mode = True  # Permite que o Pydantic use o modelo SQLAlchemy
 
-class ItemResponse(BaseModel):
-    id: int
-    nome: str
-    departamento: str
-    itens: int
+#class ItemResponse(BaseModel):
+ #   id: int
+  #  nome: str
+   # departamento: str
+    #itens: int
 
     class Config:
         orm_mode = True
-
-from pydantic import BaseModel
-
-class ItemCreate(BaseModel):
-    nome: str
-    departamento: str
-    itens: int
