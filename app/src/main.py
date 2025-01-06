@@ -32,6 +32,10 @@ for item in result:
 
 def main():
     print("Olá, mundo! Este é o meu novo projeto.")
+<<<<<<< HEAD
+>>>>>>> main
+=======
+>>>>>>> 5b82b6b (add tests and improvements)
 >>>>>>> main
 
 # Adiciona o diretório raiz ao sys.path para garantir que os módulos sejam encontrados
