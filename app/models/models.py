@@ -1,3 +1,4 @@
+from app.database import Base 
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
 
@@ -16,7 +17,7 @@ class ItemResponse(ItemCreate):
     class Config:
         orm_mode = True
 
-class Item:
+class Item(Base):
     __tablename__ = "items"
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String, index=True)
