@@ -2,15 +2,18 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# URL de conexão com o banco de dados
-DATABASE_URL = "sqlite:///./inventory.db"  # Ajuste para o seu banco de dados
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-# Criação do engine e sessão
+DATABASE_URL = "sqlite:///./inventory.db"
+
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Criação do Base para SQLAlchemy
 Base = declarative_base()
 
-# Criação das tabelas no banco de dados
-Base.metadata.create_all(bind=engine)  # Criação das tabelas
+Base.metadata.create_all(bind=engine) 

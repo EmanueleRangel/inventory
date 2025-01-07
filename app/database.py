@@ -4,6 +4,13 @@ from app.models.database import Base  # Garantir que o Base está sendo importad
 
 DATABASE_URL = "sqlite:///./inventory.db"  # URL do banco de dados
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 # Criação do engine e sessão
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
