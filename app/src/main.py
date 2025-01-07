@@ -10,8 +10,28 @@ import sys
 import os
 from app.models.models import Item
 
+<<<<<<< HEAD
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+=======
+session = get_session() # type: ignore
+result = session.query(Item).filter(Item.some_column == 'valor_especifico').all()
+
+for item in result:
+    print(item)
+
+def main():
+    print("Olá, mundo! Este é o meu novo projeto.")
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+app = FastAPI()
+
+Base.metadata.create_all(bind=engine)  # Certifique-se de que as tabelas são criadas
+
+app = FastAPI()
+
+>>>>>>> main
 def get_db():
     db = SessionLocal()
     try:
@@ -39,5 +59,30 @@ async def get_graph(db: Session = Depends(get_db)):
 
 @app.on_event("startup")
 def on_startup():
+<<<<<<< HEAD
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
+=======
+    # Criação das tabelas
+    Base.metadata.create_all(bind=engine)
+
+
+def create_sample_data(db: Session):
+    # Adicionar alguns dados de exemplo, se necessário
+    item1 = Item(departamento="TI", itens=10)
+    item2 = Item(departamento="RH", itens=20)
+    db.add(item1)
+    db.add(item2)
+    db.commit()
+
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.drop_all(bind=engine)  # Apaga as tabelas antigas
+    Base.metadata.create_all(bind=engine)  # Cria as novas tabelas
+
+models.Base.metadata.create_all(bind=engine)
+
+app = FastAPI()
+
+app.include_router(items.router)
+>>>>>>> main
