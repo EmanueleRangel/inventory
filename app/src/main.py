@@ -5,20 +5,16 @@ import pandas as pd
 from plotly.io import to_html
 from sqlalchemy.orm import Session
 import app
+from app import models
 from app.models.database import SessionLocal, engine, Base
 import sys
 import os
 from app.models.models import Item
+from app.routers import items
 
-<<<<<<< HEAD
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-=======
 session = get_session() # type: ignore
-result = session.query(Item).filter(Item.some_column == 'valor_especifico').all()
-
-for item in result:
-    print(item)
 
 def main():
     print("Olá, mundo! Este é o meu novo projeto.")
@@ -31,7 +27,6 @@ Base.metadata.create_all(bind=engine)  # Certifique-se de que as tabelas são cr
 
 app = FastAPI()
 
->>>>>>> main
 def get_db():
     db = SessionLocal()
     try:
@@ -59,10 +54,8 @@ async def get_graph(db: Session = Depends(get_db)):
 
 @app.on_event("startup")
 def on_startup():
-<<<<<<< HEAD
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
-=======
     # Criação das tabelas
     Base.metadata.create_all(bind=engine)
 
@@ -85,4 +78,3 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(items.router)
->>>>>>> main

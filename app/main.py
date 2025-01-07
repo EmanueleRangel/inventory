@@ -1,34 +1,23 @@
-from fastapi import FastAPI, Depends
-from fastapi.responses import HTMLResponse
-from sqlalchemy.orm import Session
-from app.models.database import Base, engine, get_session
+from fastapi import FastAPI
+from app.models.database import Base, engine, SessionLocal
 from app.models.models import Item
-from app.routers import items
-import plotly.express as px
-import pandas as pd
-from plotly.io import to_html
+from app.routers import graph
 
+# Criar a instância da aplicação
 app = FastAPI()
 
-# Cria tabelas no banco de dados
+# Criação das tabelas e dados de exemplo
 @app.on_event("startup")
 def on_startup():
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.drop_all(bind=engine)  # Apaga as tabelas antigas
+    Base.metadata.create_all(bind=engine)  # Cria as novas tabelas
+    with SessionLocal() as session:
+        session.add_all([
+            Item(departamento="TI", itens=10),
+            Item(departamento="RH", itens=20),
+            Item(departamento="Financeiro", itens=15),
+        ])
+        session.commit()
 
-# Gera um gráfico
-def generate_graph(db: Session):
-    items = db.query(Item.departamento, Item.itens).all()
-    if not items:
-        return "<html><body>No data available</body></html>"
-
-    df = pd.DataFrame(items, columns=["Departamento", "Itens"])
-    fig = px.bar(df, x="Departamento", y="Itens", title="Itens por Departamento")
-    return to_html(fig, full_html=False)
-
-@app.get("/grafico", response_class=HTMLResponse)
-async def get_graph(db: Session = Depends(get_session)):
-    graph_html = generate_graph(db)
-    return f"<html><body>{graph_html}</body></html>"
-
-# Inclui rotas do módulo items
-app.include_router(items.router)
+# Inclui o roteador de gráficos
+app.include_router(graph.router)
