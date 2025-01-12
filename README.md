@@ -32,11 +32,14 @@ git clone https://github.com/seuusuario/nome-do-repositorio.git
 
 cd nome-do-repositorio
 
-#windows
-.\venv\Scripts\activate
+#Comando para criar o ambiente:
+```python3 -m venv .venv ```
 
 #mac/linux
 source venv/bin/activate
+
+#windows
+.\venv\Scripts\activate
 
 #instalar dependências
 pip install -r requirements.txt
