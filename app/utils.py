@@ -2,9 +2,9 @@
 import pandas as pd
 import plotly.express as px
 from typing import List
-from app.models import Item  # ou o modelo que você está utilizando
+from app.models import Items  # ou o modelo que você está utilizando
 
-def generate_graph(items: List[Item]):
+def generate_graph(items: List[Items]):
     # Criar um DataFrame a partir dos itens
     df = pd.DataFrame([{
         "Nome": item.nome,

@@ -5,9 +5,9 @@ from app.models.database import SessionLocal, engine, Base
 from app.routers import items, usuarios
 from app.models.database import engine
 import app.models as models
-from app.models import Item
+from app.models import Items
 from app.models.database import engine, Base
-from app.models.models import Item, Usuarios  # Importe o modelo aqui para criar as tabelas
+from app.models.models import Items, Users  # Importe o modelo aqui para criar as tabelas
 import sys
 import os
 
@@ -66,8 +66,8 @@ def get_db():
 
 def create_sample_data(db: Session):
     # Adicionar alguns dados de exemplo, se necessário
-    item1 = Item(departamento="TI", itens=10)
-    item2 = Item(departamento="RH", itens=20)
+    item1 = Items(departamento="TI", itens=10)
+    item2 = Items(departamento="RH", itens=20)
     db.add(item1)
     db.add(item2)
     db.commit()

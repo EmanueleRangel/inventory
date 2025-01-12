@@ -4,14 +4,14 @@ from .database import Base  # Importe o Base do arquivo database.py
 from pydantic import BaseModel, Field
 
 class ItemCreate(BaseModel):
-    nome_funcionario: str = Field("", description="O nome do funcionário")
-    matricula: str = Field("", description="A matrícula do funcionário")
-    departamento: str = Field("", description="O departamento do funcionário")
-    nome_do_item: str = Field("", description="O nome do item")
-    descricao_do_item: str = Field("", description="A descrição do item")
-    numero_de_serie_do_item: str = Field("", description="O número de série do item")
-    numero_de_serie_do_patrimonio: str = Field("", description="O número do patrimonio")
-    situacao_do_item: str = Field("", description="A situação do item")
+    employee_name: str = Field("", description="O nome do funcionário")
+    registration: str = Field("", description="A matrícula do funcionário")
+    departament: str = Field("", description="O departamento do funcionário")
+    item_name: str = Field("", description="O nome do item")
+    description_item: str = Field("", description="A descrição do item")
+    serial_number: str = Field("", description="O número de série do item")
+    asset_serial_number: str = Field("", description="O número do patrimonio")
+    item_status: str = Field("", description="A situação do item")
 
     class Config:
         orm_mode = True
@@ -22,47 +22,50 @@ class ItemResponse(ItemCreate):
     class Config:
         orm_mode = True
 
-class Item(Base):
+class Items(Base):
     __tablename__ = "items"  # Nome da tabela no banco de dados
     id = Column(Integer, primary_key=True, autoincrement=True)  # Definindo 'id' como autoincremento
-    nome_funcionario = Column(String, nullable=False)
-    matricula = Column(String, nullable=False)
-    departamento = Column(String, nullable=False)
-    nome_do_item= Column(String, nullable=False)
-    descricao_do_item= Column(String, nullable=False)
-    numero_de_serie_do_item= Column(String, nullable=False)
-    numero_de_serie_do_patrimonio= Column(String, nullable=False)
-    situacao_do_item= Column(String, nullable=False)
+    employee_name = Column(String, nullable=False)
+    registration = Column(String, nullable=False)
+    departament = Column(String, nullable=False)
+    item_name= Column(String, nullable=False)
+    description_item= Column(String, nullable=False)
+    serial_number= Column(String, nullable=False)
+    asset_serial_number= Column(String, nullable=False)
+    item_status= Column(String, nullable=False)
 
     class Config:
         orm_mode = True
 
-class CriarUsuario(BaseModel):
-    nome: str = Field("", description="O nome do usuário")
+class UserCreate(BaseModel):
+    first_name: str = Field("", description="O nome do usuário")
+    last_name: str = Field ("", description="Segundo nome")
     email: str = Field("", description="O email do usuário")
     password: str = Field("", description="A senha do usuário")
-    matricula: str = Field("", description="A matrícula do usuário")
-    departamento: str = Field("", description="O departamento do usuário")
+    registration: str = Field("", description="A matrícula do usuário")
+    departament: str = Field("", description="O departamento do usuário")
 
-class CriarUsuarioResponse(CriarUsuario):
+class UserResponse(UserCreate):
     id: int = Field("", description="O ID do usuário")
-    nome: str = Field("", description="O nome do usuário")
+    first_name: str = Field("", description="O nome do usuário")
+    last_name: str = Field ("", description="Segundo nome")
     email: str = Field("", description="O email do usuário")
     password: str = Field("", description="A senha do usuário")
-    matricula: str = Field("", description="A matrícula do usuário")
-    departamento: str = Field("", description="O departamento do usuário")
+    resgistration: str = Field("", description="A matrícula do usuário")
+    departament: str = Field("", description="O departamento do usuário")
 
     class Config:
         orm_mode = True
 
-class Usuarios(Base):
+class Users(Base):
     __tablename__ = "usuarios"  # Nome da tabela no banco de dados
     id = Column(Integer, primary_key=True, autoincrement=True)  # Definindo 'id' como autoincremento
-    nome = Column(String, nullable=False)
+    first_name = Column(String, nullable=False)
+    last_name = Column(String, nullable=False )
     email = Column(String, nullable=False)
     password = Column(String, nullable=False)
-    matricula = Column(String, nullable=False)
-    departamento = Column(String, nullable=False)
+    registration = Column(String, nullable=False)
+    departament = Column(String, nullable=False)
 
     class Config:
         orm_mode = True

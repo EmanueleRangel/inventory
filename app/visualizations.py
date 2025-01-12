@@ -1,8 +1,8 @@
 from typing import List
-from app.models.models import Item
+from app.models.models import Items
 
 # Função: Gera os dados da tabela a partir de uma lista de itens
-def generate_graph_from_items(items: List[Item]):
+def generate_graph(items: List[Items]):
     # Convertendo os itens para um DataFrame-like
     data = [
         {
