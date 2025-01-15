@@ -97,8 +97,6 @@ sys.dont_write_bytecode = True
 # Adiciona a raiz do projeto ao sys.path (para evitar problemas de importação)
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
-app = FastAPI()
-
 # Inclui as rotas
 app.include_router(items.router)
 app.include_router(usuarios.api_router)
