@@ -1,15 +1,12 @@
 from azure.storage.blob import BlobServiceClient
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 
-# Carregar variáveis de ambiente
 load_dotenv()
 
-# Configurações do Azure Blob Storage
 AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")  
-CONTAINER_NAME = "meu-container"
+CONTAINER_NAME = os.getenv(CONTAINER_NAME)
 
-# Inicializar serviço do Blob Storage
 blob_service_client = BlobServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
 container_client = blob_service_client.get_container_client(CONTAINER_NAME)
 
