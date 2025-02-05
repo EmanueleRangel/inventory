@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from plotly.io import to_html
 from sqlalchemy.orm import Session
 from app.models.database import SessionLocal, engine, Base
-from app.routers import items, usuarios
+from app.routers import items, upload, usuarios
 from app.models.database import engine
 import app.models as models
 from app.models import Items
@@ -44,18 +44,11 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(items.router)
-from fastapi import FastAPI
-from app.routers import items
-from app.database import Base, engine
-import os
-import sys
-from sqlalchemy import select
+app.include_router(upload.router)
+app.include_router(usuarios.api_router)
 
 sys.dont_write_bytecode = True
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
-
-app.include_router(items.router)
-app.include_router(usuarios.api_router)
 
 Base.metadata.create_all(bind=engine)
