@@ -2,10 +2,9 @@
 import pandas as pd
 import plotly.express as px
 from typing import List
-from app.models import Items  # ou o modelo que você está utilizando
+from app.models import Items
 
 def generate_graph(items: List[Items]):
-    # Criar um DataFrame a partir dos itens
     df = pd.DataFrame([{
         "Nome": item.nome,
         "Matrícula": item.matricula,
@@ -13,8 +12,6 @@ def generate_graph(items: List[Items]):
         "Item": item.item_nome
     } for item in items])
     
-    # Gerar o gráfico
     fig = px.bar(df, x="Departamento", color="Item", title="Itens por Departamento")
     
-    # Retorna o gráfico como HTML
     return fig.to_html(full_html=False)

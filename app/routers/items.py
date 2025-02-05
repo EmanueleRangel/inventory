@@ -6,11 +6,7 @@ from app.models.models import Items, ItemResponse, ItemCreate
 from fastapi.responses import JSONResponse, HTMLResponse
 from app.models.database import SessionLocal
 from app.utils import generate_graph
-from app.models.database import SessionLocal  # Corrigindo a importação
 from app.models import Items
-from fastapi.responses import HTMLResponse
-from app.models import Items, ItemCreate, ItemResponse
-from app.visualizations import generate_graph
 
 router = APIRouter()
 
@@ -43,16 +39,16 @@ async def create_item(item: ItemCreate, db: Session = Depends(get_db)):
         db.refresh(db_item)
         return db_item
     except Exception as e:
-        db.rollback()  # Reverte a transação em caso de erro
+        db.rollback()
         raise HTTPException(status_code=500, detail="Error while creating item: " + str(e))
 
 
 
 @router.get("/grafico", response_class=JSONResponse)
 async def get_graph(db: Session = Depends(get_db)):
-    items = db.query(Items).all()  # Consulta os itens do banco de dados
+    items = db.query(Items).all()
     graph_json = generate_graph(items)
-    return JSONResponse(content=graph_json)  # Retorna o gráfico como JSON
+    return JSONResponse(content=graph_json)
 
 def main():
     statement = select(Items.items)

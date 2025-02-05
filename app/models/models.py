@@ -1,6 +1,6 @@
 from app.database import Base 
 from sqlalchemy import Column, Integer, String
-from .database import Base  # Importe o Base do arquivo database.py
+from .database import Base 
 from pydantic import BaseModel, Field
 
 class ItemCreate(BaseModel):
@@ -23,8 +23,8 @@ class ItemResponse(ItemCreate):
         orm_mode = True
 
 class Items(Base):
-    __tablename__ = "items"  # Nome da tabela no banco de dados
-    id = Column(Integer, primary_key=True, autoincrement=True)  # Definindo 'id' como autoincremento
+    __tablename__ = "items" 
+    id = Column(Integer, primary_key=True, autoincrement=True)
     employee_name = Column(String, nullable=False)
     registration = Column(String, nullable=False)
     departament = Column(String, nullable=False)
@@ -58,8 +58,8 @@ class UserResponse(UserCreate):
         orm_mode = True
 
 class Users(Base):
-    __tablename__ = "usuarios"  # Nome da tabela no banco de dados
-    id = Column(Integer, primary_key=True, autoincrement=True)  # Definindo 'id' como autoincremento
+    __tablename__ = "usuarios"
+    id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False )
     email = Column(String, nullable=False)

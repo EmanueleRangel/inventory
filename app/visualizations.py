@@ -1,9 +1,7 @@
 from typing import List
 from app.models.models import Items
 
-# Função: Gera os dados da tabela a partir de uma lista de itens
 def generate_graph(items: List[Items]):
-    # Convertendo os itens para um DataFrame-like
     data = [
         {
             "nome": item.nome,
@@ -14,9 +12,8 @@ def generate_graph(items: List[Items]):
         for item in items
     ]
     
-    # Criando a estrutura de JSON
     result = {
         "data": data
     }
     
-    return result  # Retorna as colunas e os dados como JSON
+    return result
