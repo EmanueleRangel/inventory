@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException
-from app.services.blob_storage import upload_to_blob_storage
+from src.services.blob_storage import upload_to_blob_storage
 
 router = APIRouter()
 

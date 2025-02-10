@@ -1,5 +1,5 @@
-from app.database import get_session
-from app.models.models import Items
+from src.database import get_session
+from src.models.models import Items
 
 session = get_session()
 

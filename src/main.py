@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from plotly.io import to_html
 from sqlalchemy.orm import Session
-from app.models.database import SessionLocal, engine, Base
-from app.routers import items, upload, usuarios
-from app.models.database import engine
-import app.models as models
-from app.models import Items
-from app.models.database import engine, Base
-from app.models.models import Items, Users
+from src.models.database import SessionLocal, engine, Base
+from src.routers import items, upload, usuarios
+from src.models.database import engine
+import src.models as models
+from src.models import Items
+from src.models.database import engine, Base
+from src.models.models import Items, Users
 import sys
 import os
 

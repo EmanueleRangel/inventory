@@ -2,8 +2,8 @@ from typing import List, Optional
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from app.models.models import Users, UserCreate, UserResponse
-from app.models.database import SessionLocal
+from src.models.models import Users, UserCreate, UserResponse
+from src.models.database import SessionLocal
 
 api_router = APIRouter(prefix="/usuarios", tags=["Usuarios"])
 

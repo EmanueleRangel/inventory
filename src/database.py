@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
-from app.models.database import Base
+from src.models.database import Base
 
 DATABASE_URL = "sqlite:///./inventory.db"
 

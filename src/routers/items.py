@@ -2,11 +2,11 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
-from app.models.models import Items, ItemResponse, ItemCreate
+from src.models.models import Items, ItemResponse, ItemCreate
 from fastapi.responses import JSONResponse, HTMLResponse
-from app.models.database import SessionLocal
-from app.utils import generate_graph
-from app.models import Items
+from src.models.database import SessionLocal
+from src.utils import generate_graph
+from src.models import Items
 
 router = APIRouter()
 

@@ -1,5 +1,5 @@
 from typing import List
-from app.models.models import Items
+from src.models.models import Items
 
 def generate_graph(items: List[Items]):
     data = [
